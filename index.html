@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CYBER_DECK // v2.2</title>
+    <title>CYBER_DECK // v2.3</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -43,30 +43,33 @@
             pointer-events: none;
         }
 
-        /* --- HEADER COM PROPORÇÃO CORRIGIDA --- */
+        /* --- HEADER COM LOGO --- */
         header {
-            border-bottom: 1px solid var(--neon-blue);
-            background: #1a1a20;
-            overflow: hidden;
-        }
-
-        /* Ajuste da imagem do Header para não ficar gigante */
-        .header-banner {
-            width: 100%;
-            height: 100px; /* Altura controlada para celular */
-            object-fit: cover;
-            display: block;
-            filter: brightness(0.6) contrast(1.2); /* Estilização cyberpunk */
-        }
-
-        .header-text {
             padding: 15px 20px;
-            background: linear-gradient(to bottom, transparent, var(--bg));
+            border-bottom: 1px solid var(--neon-blue);
+            background: linear-gradient(to bottom, #1a1a20, var(--bg));
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center; /* Alinha logo e texto no meio */
+            gap: 12px; /* Espaço entre logo e texto */
+        }
+
+        .logo-img {
+            height: 45px; /* Tamanho do logo controlado */
+            width: auto;
+            border: 1px solid var(--neon-blue);
+            padding: 2px;
+            filter: drop-shadow(0 0 5px var(--neon-blue));
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--neon-blue);
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -76,7 +79,7 @@
         .status-bar {
             font-size: 0.6rem;
             color: var(--terminal-green);
-            margin-top: 5px;
+            margin-left: 2px;
         }
 
         /* --- CONTEÚDO --- */
@@ -109,6 +112,7 @@
             opacity: 0.5;
         }
 
+        /* Perfil User */
         .profile-container {
             display: flex;
             justify-content: center;
@@ -124,9 +128,9 @@
             box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
         }
 
+        /* Imagem de posts */
         .post-image {
-            width: 100%; 
-            height: auto; 
+            width: 100%; height: auto; 
             margin: 15px 0;
             border-radius: 4px;
             border: 1px solid var(--neon-blue); 
@@ -202,13 +206,12 @@
 <body>
 
 <header>
-    <img src="backdoor.png" alt="Header Banner" class="header-banner">
-    
-    <div class="header-text">
+    <div class="logo-container">
+        <img src="backdoor.png" alt="Logo CyberDeck" class="logo-img">
         <h1>Cyber_Deck_V2</h1>
-        <div class="status-bar">
-            <span class="blink">●</span> SYSTEM: ONLINE | ID: ADMIN_01
-        </div>
+    </div>
+    <div class="status-bar">
+        <span class="blink">●</span> SYSTEM: ONLINE | ID: ADMIN_01
     </div>
 </header>
 
@@ -226,7 +229,7 @@
         <div class="post-card">
             <span class="post-tag">Daily</span>
             <h2>Sessão Noturna</h2>
-            <p>Ajustando a taxa de amostragem serial para comunicação com sensores externos.</p>
+            <p>Mais uma noite codando em Python. Otimizei o script de automação de hardware em 15%.</p>
         </div>
     </section>
 
@@ -234,7 +237,7 @@
         <div class="post-card">
             <span class="post-tag">Retro</span>
             <h2>O Poder do RetroTINK</h2>
-            <p>Configurando multiplicadores de linha para monitor CRT.</p>
+            <p>Configurando o novo escalador para o PS1. A imagem está mais nítida que a realidade.</p>
         </div>
     </section>
 
@@ -243,7 +246,7 @@
             <span class="post-tag">Evidence</span>
             <h2>Esquema da Backdoor</h2>
             <img src="backdoor.png" alt="Diagrama de rede" class="post-image">
-            <p>Diagrama recuperado do servidor corrompido.</p>
+            <p>Diagrama de rede recuperado do servidor corrompido.</p>
         </div>
     </section>
 </div>
