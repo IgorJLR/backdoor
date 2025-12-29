@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON_ARCHIVE // V.1.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --primary: #00f3ff; /* Cyan */
+            --secondary: #ff0055; /* Magenta */
+            --accent: #bc00ff;
+            --text-color: #e0e0e0;
+            --card-bg: rgba(20, 20, 20, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Roboto Mono', monospace;
+            overflow-x: hidden;
+            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        /* Navegação por Abas */
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #111;
+            padding: 10px;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 0 15px var(--secondary);
+        }
+
+        /* Conteúdo das Abas */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Estilo dos Posts */
+        .post-card {
+            background: var(--card-bg);
+            border-left: 5px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .post-card:hover {
+            transform: scale(1.02);
+            border-left: 5px solid var(--accent);
+        }
+
+        .post-card h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .glitch-effect {
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.7rem;
+            color: var(--primary);
+            opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="glitch-effect">SYSTEM_OVERRIDE</h1>
+    <p>>_ Terminal de acesso ao banco de dados</p>
+</header>
+
+<nav>
+    <button class="tab-btn active" onclick="openTab(event, 'logs')">LOGS</button>
+    <button class="tab-btn" onclick="openTab(event, 'hardware')">HARDWARE</button>
+    <button class="tab-btn" onclick="event, openTab(event, 'updates')">SISTEMA</button>
+</nav>
+
+<div class="container">
+    
+    <section id="logs" class="tab-content active">
+        <div class="post-card">
+            <div class="post-date">29.DEZ.2025 // 00:42</div>
+            <h2>Invasão na Rede Central</h2>
+            <p>Conseguimos acesso aos protocolos da Mainframe. Os dados sugerem que a arquitetura do sistema foi modificada sem aviso prévio...</p>
+        </div>
+        <div class="post-card">
+            <div class="post-date">20.DEZ.2025 // 14:10</div>
+            <h2>Otimização de Scanners</h2>
+            <p>Novos scripts em Python para leitura serial de sensores biométricos foram implementados com sucesso.</p>
+        </div>
+    </section>
+
+    <section id="hardware" class="tab-content">
+        <div class="post-card">
+            <h2>Modificação OSSC v2</h2>
+            <p>Análise técnica sobre como o novo multiplicador de linhas afeta a latência em consoles retrô operando em displays OLED.</p>
+        </div>
+    </section>
+
+    <section id="updates" class="tab-content">
+        <div class="post-card">
+            <h2>Update v1.0.4</h2>
+            <p>- Interface visual recalibrada.<br>- Bugs na renderização de sombras neon corrigidos.<br>- Protocolo HTTPS forçado.</p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    &copy; 2025 NEON_ARCHIVE | Desenvolvido em ambiente isolado.
+</footer>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        
+        // Esconder todos os conteúdos
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+        }
+
+        // Remover classe active de todos os botões
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+
+        // Mostrar a aba atual e adicionar classe active ao botão
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
