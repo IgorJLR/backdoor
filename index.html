@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CYBER_DECK // Mobile</title>
+    <title>CYBER_DECK // User Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -91,6 +91,7 @@
             overflow: hidden;
         }
 
+        /* Efeito de canto cortado */
         .post-card::after {
             content: "";
             position: absolute;
@@ -101,20 +102,59 @@
             opacity: 0.5;
         }
 
+        /* --- NOVOS ESTILOS PARA FOTO DE PERFIL --- */
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .profile-image {
+            width: 120px; /* Tamanho fixo bom para celular */
+            height: 120px;
+            object-fit: cover; /* Garante que a foto não distorça se não for quadrada */
+            border-radius: 50%; /* Faz a imagem ficar redonda */
+            border: 3px solid var(--neon-pink); /* Borda rosa para destaque */
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5); /* Brilho rosa intenso */
+        }
+        /* ----------------------------------------- */
+
+
+        /* Estilo para imagens normais de posts (como a backdoor.png) */
+        .post-image {
+            width: 100%; 
+            height: auto; 
+            margin: 15px 0;
+            border-radius: 4px;
+            border: 1px solid var(--neon-blue); 
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); 
+            filter: contrast(1.1) brightness(0.9);
+        }
+
         .post-tag {
             font-size: 0.7rem;
-            color: var(--neon-pink);
+            color: var(--neon-blue);
             font-weight: bold;
             text-transform: uppercase;
             margin-bottom: 8px;
             display: block;
         }
+        
+        /* Tag especial rosa para o perfil */
+        .tag-pink {
+             color: var(--neon-pink) !important;
+        }
+
 
         .post-card h2 {
             font-size: 1.1rem;
             margin-bottom: 10px;
             font-family: 'Orbitron', sans-serif;
             color: #fff;
+        }
+        
+        .text-center {
+            text-align: center;
         }
 
         .post-card p {
@@ -152,48 +192,44 @@
             font-family: 'Orbitron', sans-serif;
         }
 
-        .nav-item i {
-            font-size: 1.2rem;
-            margin-bottom: 4px;
-        }
-
         .nav-item.active {
             color: var(--neon-blue);
             text-shadow: 0 0 10px var(--neon-blue);
         }
 
-        /* Animação */
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Glitch no texto da status bar */
-        .blink {
-            animation: blinker 1s linear infinite;
-        }
-
-        @keyframes blinker {
-            50% { opacity: 0; }
-        }
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
 
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Cyber_Archive_v1</h1>
+    <h1>Cyber_Deck_V2</h1> <img src="backdoor.png" alt="Foto do Usuário">
     <div class="status-bar">
-        <span class="blink">●</span> SYSTEM: ONLINE | USER: GUEST_01
+        <span class="blink">●</span> SYSTEM: ONLINE | ID: ADMIN_01
     </div>
 </header>
 
 <div class="feed">
     <section id="logs" class="tab-content active">
-        <div class="post-card">
-            <span class="post-tag">Security</span>
-            <h2>Protocolo de Rede Quebrado</h2>
-            <p>O firewall da sub-rede 04 caiu às 03:00. Verificando integridade dos dados criptografados...</p>
+        
+        <div class="post-card" style="border-left: 3px solid var(--neon-pink);">
+            <span class="post-tag tag-pink">USER PROFILE // ADMIN</span>
+            
+            <div class="profile-container">
+                <img src="avatar.jpg" alt="Foto do Usuário" class="profile-image">
+            </div>
+            
+            <h2 class="text-center">[SEU NOME/NICK AQUI]</h2>
+            <p class="text-center">
+                 Netrunner independente operando nas sombras de Neo-Camboriú. Especialista em Python, quebra de criptografia e hardware legado.
+            </p>
         </div>
         <div class="post-card">
             <span class="post-tag">Daily</span>
@@ -212,9 +248,10 @@
 
     <section id="files" class="tab-content">
         <div class="post-card">
-            <span class="post-tag">Data</span>
-            <h2>Planos_TCC.pdf</h2>
-            <p>Arquivo sobre arquitetura escolar sincronizado com o servidor Camboriú.</p>
+            <span class="post-tag">Evidence</span>
+            <h2>Esquema da Backdoor</h2>
+            <img src="backdoor.png" alt="Diagrama de rede" class="post-image">
+            <p>Diagrama de rede recuperado do servidor corrompido.</p>
         </div>
     </section>
 </div>
@@ -234,24 +271,13 @@
 <script>
     function openTab(evt, tabName) {
         let i, tabcontent, navitems;
-        
         tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].classList.remove("active");
-        }
-
+        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].classList.remove("active"); }
         navitems = document.getElementsByClassName("nav-item");
-        for (i = 0; i < navitems.length; i++) {
-            navitems[i].classList.remove("active");
-        }
-
+        for (i = 0; i < navitems.length; i++) { navitems[i].classList.remove("active"); }
         document.getElementById(tabName).classList.add("active");
         evt.currentTarget.classList.add("active");
-        
-        // Feedback vibratório simples (se o navegador suportar)
-        if (navigator.vibrate) {
-            navigator.vibrate(20);
-        }
+        if (navigator.vibrate) { navigator.vibrate(20); }
     }
 </script>
 
