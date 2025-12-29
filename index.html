@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CYBER_DECK // User Profile</title>
+    <title>CYBER_DECK // v2.2</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -27,10 +27,10 @@
             color: #ececec;
             font-family: 'JetBrains Mono', monospace;
             line-height: 1.6;
-            padding-bottom: 80px; /* Espaço para a barra inferior */
+            padding-bottom: 80px; 
         }
 
-        /* Efeito de Scanlines (Linhas de monitor) */
+        /* Efeito de Scanlines */
         body::before {
             content: "";
             position: fixed;
@@ -43,12 +43,25 @@
             pointer-events: none;
         }
 
-        /* Header Compacto */
+        /* --- HEADER COM PROPORÇÃO CORRIGIDA --- */
         header {
-            padding: 20px;
             border-bottom: 1px solid var(--neon-blue);
-            text-align: left;
-            background: linear-gradient(to bottom, #1a1a20, var(--bg));
+            background: #1a1a20;
+            overflow: hidden;
+        }
+
+        /* Ajuste da imagem do Header para não ficar gigante */
+        .header-banner {
+            width: 100%;
+            height: 100px; /* Altura controlada para celular */
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.6) contrast(1.2); /* Estilização cyberpunk */
+        }
+
+        .header-text {
+            padding: 15px 20px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
         }
 
         h1 {
@@ -66,21 +79,16 @@
             margin-top: 5px;
         }
 
-        /* Container de Posts */
-        .feed {
-            padding: 15px;
-        }
+        /* --- CONTEÚDO --- */
+        .feed { padding: 15px; }
 
         .tab-content {
             display: none;
             animation: slideUp 0.3s ease-out;
         }
 
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content.active { display: block; }
 
-        /* Estilo dos Cards (Otimizado para touch) */
         .post-card {
             background: var(--card-bg);
             border: 1px solid #2d2d35;
@@ -91,7 +99,6 @@
             overflow: hidden;
         }
 
-        /* Efeito de canto cortado */
         .post-card::after {
             content: "";
             position: absolute;
@@ -102,7 +109,6 @@
             opacity: 0.5;
         }
 
-        /* --- NOVOS ESTILOS PARA FOTO DE PERFIL --- */
         .profile-container {
             display: flex;
             justify-content: center;
@@ -110,17 +116,14 @@
         }
 
         .profile-image {
-            width: 120px; /* Tamanho fixo bom para celular */
+            width: 120px;
             height: 120px;
-            object-fit: cover; /* Garante que a foto não distorça se não for quadrada */
-            border-radius: 50%; /* Faz a imagem ficar redonda */
-            border: 3px solid var(--neon-pink); /* Borda rosa para destaque */
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5); /* Brilho rosa intenso */
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--neon-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
         }
-        /* ----------------------------------------- */
 
-
-        /* Estilo para imagens normais de posts (como a backdoor.png) */
         .post-image {
             width: 100%; 
             height: auto; 
@@ -128,7 +131,6 @@
             border-radius: 4px;
             border: 1px solid var(--neon-blue); 
             box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); 
-            filter: contrast(1.1) brightness(0.9);
         }
 
         .post-tag {
@@ -140,11 +142,7 @@
             display: block;
         }
         
-        /* Tag especial rosa para o perfil */
-        .tag-pink {
-             color: var(--neon-pink) !important;
-        }
-
+        .tag-pink { color: var(--neon-pink) !important; }
 
         .post-card h2 {
             font-size: 1.1rem;
@@ -153,16 +151,10 @@
             color: #fff;
         }
         
-        .text-center {
-            text-align: center;
-        }
+        .text-center { text-align: center; }
+        .post-card p { font-size: 0.9rem; color: #b0b0b5; }
 
-        .post-card p {
-            font-size: 0.9rem;
-            color: #b0b0b5;
-        }
-
-        /* Barra de Navegação Inferior (Mobile Style) */
+        /* NAVEGAÇÃO INFERIOR */
         nav {
             position: fixed;
             bottom: 0;
@@ -175,7 +167,7 @@
             justify-content: space-around;
             align-items: center;
             z-index: 2000;
-            padding-bottom: 10px; /* Safe area para iPhones novos */
+            padding-bottom: 10px;
         }
 
         .nav-item {
@@ -210,31 +202,31 @@
 <body>
 
 <header>
-    <h1>Cyber_Deck_V2</h1> <img src="backdoor.png" alt="Foto do Usuário">
-    <div class="status-bar">
-        <span class="blink">●</span> SYSTEM: ONLINE | ID: ADMIN_01
+    <img src="backdoor.png" alt="Header Banner" class="header-banner">
+    
+    <div class="header-text">
+        <h1>Cyber_Deck_V2</h1>
+        <div class="status-bar">
+            <span class="blink">●</span> SYSTEM: ONLINE | ID: ADMIN_01
+        </div>
     </div>
 </header>
 
 <div class="feed">
     <section id="logs" class="tab-content active">
-        
         <div class="post-card" style="border-left: 3px solid var(--neon-pink);">
             <span class="post-tag tag-pink">USER PROFILE // ADMIN</span>
-            
             <div class="profile-container">
                 <img src="avatar.jpg" alt="Foto do Usuário" class="profile-image">
             </div>
-            
-            <h2 class="text-center">[SEU NOME/NICK AQUI]</h2>
-            <p class="text-center">
-                 Netrunner independente operando nas sombras de Neo-Camboriú. Especialista em Python, quebra de criptografia e hardware legado.
-            </p>
+            <h2 class="text-center">[SEU NOME]</h2>
+            <p class="text-center">Netrunner independente em Neo-Camboriú. Especialista em Python e hardware legado.</p>
         </div>
+
         <div class="post-card">
             <span class="post-tag">Daily</span>
             <h2>Sessão Noturna</h2>
-            <p>Mais uma noite codando em Python. Otimizei o script de automação de hardware em 15%.</p>
+            <p>Ajustando a taxa de amostragem serial para comunicação com sensores externos.</p>
         </div>
     </section>
 
@@ -242,7 +234,7 @@
         <div class="post-card">
             <span class="post-tag">Retro</span>
             <h2>O Poder do RetroTINK</h2>
-            <p>Configurando o novo escalador para o PS1. A imagem está mais nítida que a realidade.</p>
+            <p>Configurando multiplicadores de linha para monitor CRT.</p>
         </div>
     </section>
 
@@ -251,21 +243,15 @@
             <span class="post-tag">Evidence</span>
             <h2>Esquema da Backdoor</h2>
             <img src="backdoor.png" alt="Diagrama de rede" class="post-image">
-            <p>Diagrama de rede recuperado do servidor corrompido.</p>
+            <p>Diagrama recuperado do servidor corrompido.</p>
         </div>
     </section>
 </div>
 
 <nav>
-    <button class="nav-item active" onclick="openTab(event, 'logs')">
-        <span>LOGS</span>
-    </button>
-    <button class="nav-item" onclick="openTab(event, 'hardware')">
-        <span>GEAR</span>
-    </button>
-    <button class="nav-item" onclick="openTab(event, 'files')">
-        <span>DATA</span>
-    </button>
+    <button class="nav-item active" onclick="openTab(event, 'logs')">LOGS</button>
+    <button class="nav-item" onclick="openTab(event, 'hardware')">GEAR</button>
+    <button class="nav-item" onclick="openTab(event, 'files')">DATA</button>
 </nav>
 
 <script>
