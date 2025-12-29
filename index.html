@@ -2,139 +2,179 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEON_ARCHIVE // V.1.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CYBER_DECK // Mobile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #050505;
-            --primary: #00f3ff; /* Cyan */
-            --secondary: #ff0055; /* Magenta */
-            --accent: #bc00ff;
-            --text-color: #e0e0e0;
-            --card-bg: rgba(20, 20, 20, 0.8);
+            --bg: #0a0a0c;
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff0055;
+            --terminal-green: #00ff41;
+            --card-bg: #121217;
+            --nav-bg: rgba(10, 10, 12, 0.95);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Roboto Mono', monospace;
-            overflow-x: hidden;
-            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-color: var(--bg);
+            color: #ececec;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Espaço para a barra inferior */
         }
 
+        /* Efeito de Scanlines (Linhas de monitor) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Header Compacto */
         header {
-            padding: 2rem;
-            text-align: center;
-            border-bottom: 2px solid var(--primary);
-            box-shadow: 0 0 15px var(--primary);
-            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-bottom: 1px solid var(--neon-blue);
+            text-align: left;
+            background: linear-gradient(to bottom, #1a1a20, var(--bg));
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
+            font-size: 1.2rem;
+            color: var(--neon-blue);
             text-transform: uppercase;
-            letter-spacing: 5px;
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary);
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px var(--neon-blue);
         }
 
-        /* Navegação por Abas */
-        nav {
-            display: flex;
-            justify-content: center;
-            background: #111;
-            padding: 10px;
-            gap: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .status-bar {
+            font-size: 0.6rem;
+            color: var(--terminal-green);
+            margin-top: 5px;
         }
 
-        .tab-btn {
-            background: transparent;
-            border: 1px solid var(--secondary);
-            color: var(--secondary);
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            transition: 0.3s;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-        }
-
-        .tab-btn:hover, .tab-btn.active {
-            background: var(--secondary);
-            color: white;
-            box-shadow: 0 0 15px var(--secondary);
-        }
-
-        /* Conteúdo das Abas */
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 20px;
+        /* Container de Posts */
+        .feed {
+            padding: 15px;
         }
 
         .tab-content {
             display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: slideUp 0.3s ease-out;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        /* Estilo dos Posts */
+        /* Estilo dos Cards (Otimizado para touch) */
         .post-card {
             background: var(--card-bg);
-            border-left: 5px solid var(--primary);
+            border: 1px solid #2d2d35;
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            border-radius: 2px;
             position: relative;
-            transition: transform 0.2s;
+            overflow: hidden;
         }
 
-        .post-card:hover {
-            transform: scale(1.02);
-            border-left: 5px solid var(--accent);
+        .post-card::after {
+            content: "";
+            position: absolute;
+            top: 0; right: 0;
+            width: 30px; height: 30px;
+            background: var(--neon-blue);
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+            opacity: 0.5;
+        }
+
+        .post-tag {
+            font-size: 0.7rem;
+            color: var(--neon-pink);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
         }
 
         .post-card h2 {
-            color: var(--primary);
+            font-size: 1.1rem;
             margin-bottom: 10px;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+        }
+
+        .post-card p {
+            font-size: 0.9rem;
+            color: #b0b0b5;
+        }
+
+        /* Barra de Navegação Inferior (Mobile Style) */
+        nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 70px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid var(--neon-blue);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 2000;
+            padding-bottom: 10px; /* Safe area para iPhones novos */
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.65rem;
+            font-weight: bold;
+            transition: 0.3s;
+            background: none;
+            border: none;
             font-family: 'Orbitron', sans-serif;
         }
 
-        .post-date {
-            font-size: 0.8rem;
-            color: var(--secondary);
-            margin-bottom: 10px;
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
         }
 
-        .glitch-effect {
-            position: relative;
+        .nav-item.active {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
         }
 
-        @keyframes fadeIn {
+        /* Animação */
+        @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.7rem;
-            color: var(--primary);
-            opacity: 0.6;
+        /* Glitch no texto da status bar */
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
         }
 
     </style>
@@ -142,70 +182,76 @@
 <body>
 
 <header>
-    <h1 class="glitch-effect">SYSTEM_OVERRIDE</h1>
-    <p>>_ Terminal de acesso ao banco de dados</p>
+    <h1>Cyber_Archive_v1</h1>
+    <div class="status-bar">
+        <span class="blink">●</span> SYSTEM: ONLINE | USER: GUEST_01
+    </div>
 </header>
 
-<nav>
-    <button class="tab-btn active" onclick="openTab(event, 'logs')">LOGS</button>
-    <button class="tab-btn" onclick="openTab(event, 'hardware')">HARDWARE</button>
-    <button class="tab-btn" onclick="event, openTab(event, 'updates')">SISTEMA</button>
-</nav>
-
-<div class="container">
-    
+<div class="feed">
     <section id="logs" class="tab-content active">
         <div class="post-card">
-            <div class="post-date">29.DEZ.2025 // 00:42</div>
-            <h2>Invasão na Rede Central</h2>
-            <p>Conseguimos acesso aos protocolos da Mainframe. Os dados sugerem que a arquitetura do sistema foi modificada sem aviso prévio...</p>
+            <span class="post-tag">Security</span>
+            <h2>Protocolo de Rede Quebrado</h2>
+            <p>O firewall da sub-rede 04 caiu às 03:00. Verificando integridade dos dados criptografados...</p>
         </div>
         <div class="post-card">
-            <div class="post-date">20.DEZ.2025 // 14:10</div>
-            <h2>Otimização de Scanners</h2>
-            <p>Novos scripts em Python para leitura serial de sensores biométricos foram implementados com sucesso.</p>
+            <span class="post-tag">Daily</span>
+            <h2>Sessão Noturna</h2>
+            <p>Mais uma noite codando em Python. Otimizei o script de automação de hardware em 15%.</p>
         </div>
     </section>
 
     <section id="hardware" class="tab-content">
         <div class="post-card">
-            <h2>Modificação OSSC v2</h2>
-            <p>Análise técnica sobre como o novo multiplicador de linhas afeta a latência em consoles retrô operando em displays OLED.</p>
+            <span class="post-tag">Retro</span>
+            <h2>O Poder do RetroTINK</h2>
+            <p>Configurando o novo escalador para o PS1. A imagem está mais nítida que a realidade.</p>
         </div>
     </section>
 
-    <section id="updates" class="tab-content">
+    <section id="files" class="tab-content">
         <div class="post-card">
-            <h2>Update v1.0.4</h2>
-            <p>- Interface visual recalibrada.<br>- Bugs na renderização de sombras neon corrigidos.<br>- Protocolo HTTPS forçado.</p>
+            <span class="post-tag">Data</span>
+            <h2>Planos_TCC.pdf</h2>
+            <p>Arquivo sobre arquitetura escolar sincronizado com o servidor Camboriú.</p>
         </div>
     </section>
-
 </div>
 
-<footer>
-    &copy; 2025 NEON_ARCHIVE | Desenvolvido em ambiente isolado.
-</footer>
+<nav>
+    <button class="nav-item active" onclick="openTab(event, 'logs')">
+        <span>LOGS</span>
+    </button>
+    <button class="nav-item" onclick="openTab(event, 'hardware')">
+        <span>GEAR</span>
+    </button>
+    <button class="nav-item" onclick="openTab(event, 'files')">
+        <span>DATA</span>
+    </button>
+</nav>
 
 <script>
     function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
+        let i, tabcontent, navitems;
         
-        // Esconder todos os conteúdos
         tabcontent = document.getElementsByClassName("tab-content");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].classList.remove("active");
         }
 
-        // Remover classe active de todos os botões
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active");
+        navitems = document.getElementsByClassName("nav-item");
+        for (i = 0; i < navitems.length; i++) {
+            navitems[i].classList.remove("active");
         }
 
-        // Mostrar a aba atual e adicionar classe active ao botão
         document.getElementById(tabName).classList.add("active");
         evt.currentTarget.classList.add("active");
+        
+        // Feedback vibratório simples (se o navegador suportar)
+        if (navigator.vibrate) {
+            navigator.vibrate(20);
+        }
     }
 </script>
 
